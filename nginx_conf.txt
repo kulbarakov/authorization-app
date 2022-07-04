@@ -1,0 +1,18 @@
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+	upstream authorServer {
+		server localhost:8080;
+	}
+    server {
+        location / {
+			proxy_pass http://authorserver;
+		}
+	}
+}

@@ -1,2 +1,18 @@
-build: ./
-docker run --publish 8080
+version: '3.8'
+
+services:
+  app_1:
+    build: ./
+    image: authorization:1.0
+    ports:
+      - 8081:8080
+    environment:
+      TEST: env_docker_compose
+
+  app_2:
+    build: ./
+    image: authorization:latest
+    ports:
+      - 8082:8080
+    environment:
+      TEST: env_docker_compose_2
